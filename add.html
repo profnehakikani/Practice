@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <input type="text" id="email" required>
+        <input type="text" id="password">
+        <button onclick="add()">Add</button><br><br>
+
+        <input type="text" id="newemail">
+        <input type="text" id="newpassword">
+        <input type="hidden" id="index">
+        <button onclick="updateData()">update</button><br><br><br>
+        <br><br>
+
+        <table border="1" cellpadding="10px">
+            <thead>
+                <th>Email</th>
+                <th>Password</th>
+
+            </thead>
+
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+
+        <script>
+
+     
+        let arr = JSON.parse(localStorage.getItem('people')) || []
+        
+
+        function add()
+        {
+            let email=document.getElementById('email').value
+            let password=document.getElementById('password').value
+            let tbody = document.getElementById('tbody').value
+            let data={
+                email,
+                password
+            }
+      
+            // let arr = JSON.parse(localStorage.getItem('people')) || []
+            arr.push(data)
+
+            
+            // localStorage.setItem("people",(arr))
+            localStorage.setItem("people",JSON.stringify(arr))
+            location.reload()
+        }
+
+        function loadData()
+        {
+
+            arr.map((val,index)=>{
+                let tr = document.createElement('tr')
+                tr.innerHTML=`
+                                <td>${val.email}</td>
+                                <td>${val.password}</td>
+                                <button onclick="deleteData(${index})"><img src="trash.png" width="20px"/></button>
+                                <button onClick="viewData(${index})">view</button>
+
+                `
+                tbody.appendChild(tr)
+                
+            })
+
+        }
+
+        loadData()
+
+        function deleteData(index)
+        {
+            
+            // let data = arr[index]
+            // console.log(data);
+            arr.splice(index,1)
+            
+            localStorage.setItem('people',JSON.stringify(arr))
+           
+            location.reload()
+          
+        }
+
+        function viewData(index)
+        {
+            // console.log(index);
+
+            let data = arr[index]
+            console.log(data);
+
+            document.getElementById('newemail').value=data.email
+            document.getElementById('newpassword').value=data.password
+            document.getElementById('index').value=index
+        }
+
+
+        function updateData()
+        {
+
+         let email=   document.getElementById('newemail').value
+         let password=   document.getElementById('newpassword').value
+         let index =  document.getElementById('index').value
+
+         let data={
+            email,
+            password
+         }
+
+         arr.splice(index,1,data)
+            // console.log(arr);
+
+            localStorage.setItem('people',JSON.stringify(arr))
+            location.reload()
+        }
+        
+
+
+
+
+
+
+
+    </script>
+
+    </body>
+</html>

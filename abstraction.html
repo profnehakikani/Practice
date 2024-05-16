@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+
+
+        function Employee(name,salary)
+        {
+            this.name=name
+            this.salary = salary
+            //    this.bouns= 5000
+            //    let bouns=4000
+            let bonus = ()=>{
+                return this.salary/10
+            }
+         
+
+            this.printSalary=()=>{
+                // console.log("your final salary = ",this.salary+this.bouns);
+                // console.log("your final salary = ",this.salary+bouns);
+               let result= bonus()
+            console.log("your final salary = ",this.salary+result);
+                
+               
+            }
+
+        }
+
+        let emp1 = new Employee("garvit",20000)
+        // emp1.bouns=85000
+        emp1.printSalary()
+
+    </script>
+</body>
+</html>
